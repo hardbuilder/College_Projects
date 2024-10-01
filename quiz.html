@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Wellness Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #4c70af;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .question label {
+            font-weight: bold;
+            display: block;
+        }
+        .question input {
+            margin-top: 5px;
+        }
+        .result {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e0f7fa;
+            border: 2px solid #4c70af;
+            text-align: center;
+        }
+        .result p {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4c70af;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4c70af;
+        }
+        .strategies {
+            margin-top: 20px;
+            background-color: #4c70af;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .strategies ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .strategies ul li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mental Wellness Quiz</h1>
+    <form id="quizForm">
+        <div class="question">
+            <label>1. How often do you feel anxious or worried?</label>
+            <input type="radio" name="q1" value="1"> Rarely<br>
+            <input type="radio" name="q1" value="2"> Sometimes<br>
+            <input type="radio" name="q1" value="3"> Often<br>
+            <input type="radio" name="q1" value="4"> Always<br>
+        </div>
+        <div class="question">
+            <label>2. How would you rate your ability to handle stress?</label>
+            <input type="radio" name="q2" value="1"> Very Poor<br>
+            <input type="radio" name="q2" value="2"> Poor<br>
+            <input type="radio" name="q2" value="3"> Average<br>
+            <input type="radio" name="q2" value="4"> Good<br>
+        </div>
+        <div class="question">
+            <label>3. How often do you experience feelings of loneliness?</label>
+            <input type="radio" name="q3" value="1"> Rarely<br>
+            <input type="radio" name="q3" value="2"> Sometimes<br>
+            <input type="radio" name="q3" value="3"> Often<br>
+            <input type="radio" name="q3" value="4"> Always<br>
+        </div>
+        <div class="question">
+            <label>4. How would you describe your sleep quality?</label>
+            <input type="radio" name="q4" value="1"> Very Poor<br>
+            <input type="radio" name="q4" value="2"> Poor<br>
+            <input type="radio" name="q4" value="3"> Fair<br>
+            <input type="radio" name="q4" value="4"> Good<br>
+        </div>
+        <div class="question">
+            <label>5. How often do you feel tired or lack energy during the day?</label>
+            <input type="radio" name="q5" value="1"> Rarely<br>
+            <input type="radio" name="q5" value="2"> Sometimes<br>
+            <input type="radio" name="q5" value="3"> Often<br>
+            <input type="radio" name="q5" value="4"> Always<br>
+        </div>
+        <div class="question">
+            <label>6. How often do you feel overwhelmed by your responsibilities?</label>
+            <input type="radio" name="q6" value="1"> Rarely<br>
+            <input type="radio" name="q6" value="2"> Sometimes<br>
+            <input type="radio" name="q6" value="3"> Often<br>
+            <input type="radio" name="q6" value="4"> Always<br>
+        </div>
+        <button type="button" onclick="calculateResult()">Submit Quiz</button>
+    </form>
+
+    <div class="result" id="result">
+        <p id="resultText"></p>
+        <div id="strategies" class="strategies" style="display:none;">
+            <h3>Self-Care Strategies:</h3>
+            <ul>
+                <li>Practice mindfulness or meditation daily.</li>
+                <li>Exercise regularly, even if it's a short walk.</li>
+                <li>Ensure you are getting enough sleep.</li>
+                <li>Stay connected with friends and loved ones.</li>
+                <li>Set small, manageable goals to reduce stress.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function calculateResult() {
+            const form = document.getElementById('quizForm');
+            let score = 0;
+
+            const q1 = form.q1.value;
+            const q2 = form.q2.value;
+            const q3 = form.q3.value;
+            const q4 = form.q4.value;
+            const q5 = form.q5.value;
+            const q6 = form.q6.value;
+
+            if (!q1 || !q2 || !q3 || !q4 || !q5 || !q6) {
+                alert('Please answer all questions.');
+                return;
+            }
+
+            score = parseInt(q1) + parseInt(q2) + parseInt(q3) + parseInt(q4) + parseInt(q5) + parseInt(q6);
+
+            const resultDiv = document.getElementById('result');
+            const resultText = document.getElementById('resultText');
+            const strategiesDiv = document.getElementById('strategies');
+
+            if (score <= 8) {
+                resultText.textContent = "Your mental wellness seems good! Keep it up!";
+                strategiesDiv.style.display = 'none';
+            } else if (score <= 16) {
+                resultText.textContent = "You may experience mild stress or worry. Here are some self-care strategies.";
+                strategiesDiv.style.display = 'block';
+            } else {
+                window.location.href = "https://findahelpline.com/countries/in/topics/suicidal-thoughts"; 
+            }
+
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
